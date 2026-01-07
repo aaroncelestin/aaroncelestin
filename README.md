@@ -1,7 +1,7 @@
 - 👋 Hi, I’m @aaroncelestin
-- 👀 I’m interested in programming, website and graphic design and large data projects
-- 🌱 I’m currently learning front-end and website design using PUG
-- 💞️ I’m looking to collaborate on a music analysis project in Java that suggests songs based on an existing playlist
+- 👀 I’m interested in programming, automation and data structures
+- 🌱 I’m currently learning and using Rust and Management with Powershell with Entra and Exchange
+- 💞️ I’m looking to collaborate on a music analysis project in Python that suggests songs based on an existing playlist
 - 📫 How to reach me: aaroncelestin@gmail.com
 
 <!---
