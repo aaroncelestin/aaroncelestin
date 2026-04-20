@@ -1,106 +1,154 @@
- {
-        "openapi": "3.0.0",
-        "info": {
-            "title": "CH x12 API",
-            "description": "This is the full documented API for CHCore X12!",
-            "version": "2.0.0"
-        },
-        "servers":[
-            { 
-                "url": "https:172.26.20.20/ChCoreJson",
-                "description": "ClearingHouse Endpoint"
-            }     
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "CH x12 API",
+    "description": "This is the full documented API for CHCore X12.",
+    "version": "2.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://172.26.20.20/ChCoreJson",
+      "description": "ClearingHouse Endpoint"
+    }
+  ],
+  "paths": {
+    "/currentstatus": {
+      "post": {
+        "tags": [
+          "status",
+          "currentstatus"
         ],
-        "paths": {
-            "/currentstatus": {
-                "post": {
-                    "tags": [
-                        "status",
-                        "currentstatus"
-                    ],
-                    "summary": "Get current status.",
-                    "requestBody": {
-                        "required": true,
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "DCN" : [{
-                                            "Token": { "type": "string" },
-                                            "ISASenderId": { "type": "string" },
-                                            "OriginatorClaimId": { "type": "string" }
-                                        }],
-                                        "username": { "type": "string" },
-                                        "password": { "type": "string" }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "responses": {
-                        "200": {
-                            "description": "OK",
-                            "content": {
-                                "application/json": {}
-                                }
-                            }
+        "summary": "Get current status.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "DCN",
+                  "username",
+                  "password"
+                ],
+                "properties": {
+                  "DCN": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "Token": {
+                          "type": "string"
                         },
-                        "401": {
-                            "description": "Invalid credentials"
+                        "ISASenderId": {
+                          "type": "string"
                         },
-                        "400": {
-                            "description": "Invalid JSON."
+                        "OriginatorClaimId": {
+                          "type": "string"
                         }
-                    },
-                    "security": [
-                    ]
-                }
-        },
-            "/X12FileLoad": {
-                "post": {
-                    "tags": [
-                        "loadX12",
-                        "X12fileload"
-                    ],
-                    "summary": "Load X12 Document.",
-                    "requestBody": {
-                        "required": true,
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "X12Document" : [{
-                                            "DocumentType": { "type": "string" },
-                                            "DocumentName": { "type": "string", "format": "binary" },
-                                            "Document": { "type": "string", "format": "binary" }
-                                        }],
-                                        "username": { "type": "string" },
-                                        "password": { "type": "string" }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "responses": {
-                        "200": {
-                            "description": "OK",
-                            "content": {
-                                "application/json": {}
-                                }
-                            }
-                    },
-                    "401": {
-                        "description": "Invalid credentials"
-                    },
-                    "400": {
-                        "description": "Invalid JSON."
+                      }
                     }
-                },
-                "security": []
-        }
+                  },
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid JSON."
+          },
+          "401": {
+            "description": "Invalid credentials"
+          }
+        },
+        "security": []
+      }
+    },
+    "/X12FileLoad": {
+      "post": {
+        "tags": [
+          "loadX12",
+          "X12fileload"
+        ],
+        "summary": "Load X12 document.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "X12Document",
+                  "username",
+                  "password"
+                ],
+                "properties": {
+                  "X12Document": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "DocumentType": {
+                          "type": "string"
+                        },
+                        "DocumentName": {
+                          "type": "string"
+                        },
+                        "Document": {
+                          "type": "string",
+                          "format": "byte",
+                          "description": "Base64-encoded X12 document content."
+                        }
+                      }
+                    }
+                  },
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid JSON."
+          },
+          "401": {
+            "description": "Invalid credentials"
+          }
+        },
+        "security": []
+      }
+    }
+  }
 }
-    
-    
-                    
