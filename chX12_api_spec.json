@@ -1,0 +1,106 @@
+ {
+        "openapi": "3.0.0",
+        "info": {
+            "title": "CH x12 API",
+            "description": "This is the full documented API for CHCore X12!",
+            "version": "2.0.0"
+        },
+        "servers":[
+            { 
+                "url": "https:172.26.20.20/ChCoreJson",
+                "description": "ClearingHouse Endpoint"
+            }     
+        ],
+        "paths": {
+            "/currentstatus": {
+                "post": {
+                    "tags": [
+                        "status",
+                        "currentstatus"
+                    ],
+                    "summary": "Get current status.",
+                    "requestBody": {
+                        "required": true,
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "DCN" : [{
+                                            "Token": { "type": "string" },
+                                            "ISASenderId": { "type": "string" },
+                                            "OriginatorClaimId": { "type": "string" }
+                                        }],
+                                        "username": { "type": "string" },
+                                        "password": { "type": "string" }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "200": {
+                            "description": "OK",
+                            "content": {
+                                "application/json": {}
+                                }
+                            }
+                        },
+                        "401": {
+                            "description": "Invalid credentials"
+                        },
+                        "400": {
+                            "description": "Invalid JSON."
+                        }
+                    },
+                    "security": [
+                    ]
+                }
+        },
+            "/X12FileLoad": {
+                "post": {
+                    "tags": [
+                        "loadX12",
+                        "X12fileload"
+                    ],
+                    "summary": "Load X12 Document.",
+                    "requestBody": {
+                        "required": true,
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "X12Document" : [{
+                                            "DocumentType": { "type": "string" },
+                                            "DocumentName": { "type": "string", "format": "binary" },
+                                            "Document": { "type": "string", "format": "binary" }
+                                        }],
+                                        "username": { "type": "string" },
+                                        "password": { "type": "string" }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "200": {
+                            "description": "OK",
+                            "content": {
+                                "application/json": {}
+                                }
+                            }
+                    },
+                    "401": {
+                        "description": "Invalid credentials"
+                    },
+                    "400": {
+                        "description": "Invalid JSON."
+                    }
+                },
+                "security": []
+        }
+}
+    
+    
+                    
